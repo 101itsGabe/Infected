@@ -10,17 +10,21 @@ public class UnitManager : MonoBehaviour
 {
     public static UnitManager Instance;
     private List<ScriptableUnit> _units;
+
+    public BasePlayer SelectedPlayer;
+
    void Awake()
    {
     Instance = this;
-
     _units = Resources.LoadAll<ScriptableUnit>("Units").ToList();
    }
 
+
+
    public void spawnPlayer()
    {
-    var heroCount = 1;
-    for(int i = 0; i < heroCount; i++)
+    var playerCount = 1;
+    for(int i = 0; i < playerCount; i++)
     {
         var randomPrefab = GetRandomUnit<BasePlayer>(Faction.Player);
         var spawnedPlayer = Instantiate(randomPrefab);
@@ -28,14 +32,15 @@ public class UnitManager : MonoBehaviour
 
         randomSpawnTile.SetUnit(spawnedPlayer);
     }
-
     GameManager.Instance.ChangeState(GameState.SpawnEnemy);
    }
 
+
+
     public void spawnEnemy()
    {
-    var heroCount = 1;
-    for(int i = 0; i < heroCount; i++)
+    var enemyCount = 1;
+    for(int i = 0; i < enemyCount; i++)
     {
         var randomPrefab = GetRandomUnit<BaseEnemy>(Faction.Enemy);
         var spawnedEnemy = Instantiate(randomPrefab);
@@ -48,9 +53,17 @@ public class UnitManager : MonoBehaviour
    }
 
 
+
+
     private T GetRandomUnit<T>(Faction faction)where T : BaseUnit
     {
         return (T)_units.Where(u => u.Faction == faction).OrderBy(o=>Random.value).First().UnitPrefab;
+    }
+
+    public void setSelectedPlayer(BasePlayer P)
+    {
+        SelectedPlayer = P;
+        MenuManager.Instance.showSelectedPlayer(P);
     }
 
 }

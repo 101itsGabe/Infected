@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class Tile : MonoBehaviour
 {
     
+    public string TileName;
     [SerializeField] protected SpriteRenderer _renderer;
     [SerializeField] private GameObject _highlight;
     [SerializeField] private bool _isWalkable;
@@ -20,11 +21,46 @@ public abstract class Tile : MonoBehaviour
     void OnMouseEnter()
     {
         _highlight.SetActive(true);
+        MenuManager.Instance.showTileInfo(this);
+    }
+
+
+    void OnMouseDown()
+    {
+        if(GameManager.Instance.GameState != GameState.PlayerTurn) 
+            return;
+
+        if(OccupiedUnit != null)
+        {
+            if(OccupiedUnit.Faction == Faction.Player)
+                UnitManager.Instance.setSelectedPlayer(OccupiedUnit.GetComponent<BasePlayer>());
+            
+            else
+            {
+                if(UnitManager.Instance.SelectedPlayer != null)
+                {
+                    var enemy = OccupiedUnit.GetComponent<BaseEnemy>();
+                    //Doind somehting like this selected player Attack function and
+                    //sending in the base enemy
+                    Destroy(enemy.gameObject);
+                    UnitManager.Instance.setSelectedPlayer(null);
+                }
+            }
+        }
+        else
+        {
+            if(UnitManager.Instance.SelectedPlayer != null)
+            {
+                        SetUnit(UnitManager.Instance.SelectedPlayer);
+                        UnitManager.Instance.setSelectedPlayer(null);
+            }
+        }
     }
 
     public void OnMouseExit() 
     {
         _highlight.SetActive(false);
+        MenuManager.Instance.showTileInfo(null);
     }
 
     public void SetUnit(BaseUnit unit)
