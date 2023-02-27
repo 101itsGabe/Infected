@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3124573605640856810}
   - component: {fileID: 1364262275005945100}
   m_Layer: 0
-  m_Name: Tile
+  m_Name: Base_Tile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -99,6 +99,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60210b8926e4e444586b7d7bf53e3f12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _baseColor: {r: 0.4303612, g: 0.6792453, b: 0.36205056, a: 1}
+  _offsetColor: {r: 0.4560106, g: 0.8301887, b: 0.38768244, a: 1}
   _renderer: {fileID: 5924132694534307762}
   _highlight: {fileID: 8698528979096254313}
 --- !u!61 &1364262275005945100
