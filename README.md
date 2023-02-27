@@ -1,5 +1,10 @@
-# Group-18
+# The Infected Lands - Group 18
 
-The Infected Lands
+Team Members
+------------------------------------------------
+Sophia Keezel
+Gabriel Mannheimer
+Jason Ragans
+Shivraj Khatwani
 
-created using Unity Game Engine.
+
