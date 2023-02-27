@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    public GameState State;
+    public GameState GameState;
 
     void Awake()    //Allows us to grab from anywhere
     {
@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
 
     public void ChangeState(GameState newState)
     {
-        State = newState;
+        GameState = newState;
         switch(newState)
         {
             case GameState.GenerateGird:
@@ -55,3 +55,7 @@ public enum GameState
     PlayerTurn = 3,
     EnemyTurn = 4
 }
+
+
+
+

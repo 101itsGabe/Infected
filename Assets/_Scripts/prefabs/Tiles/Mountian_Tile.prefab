@@ -87,8 +87,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f462a04dcc06d8543becc84bcd2bc5d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TileName: Mountian
   _renderer: {fileID: 1293198016726324369}
   _highlight: {fileID: 4283910571833809994}
+  _isWalkable: 0
+  OccupiedUnit: {fileID: 0}
 --- !u!212 &1293198016726324369 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 5924132694534307762, guid: 717d81e8b527c124ab6eb76bd4f727ce, type: 3}
