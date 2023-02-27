@@ -2,9 +2,7 @@
 
 Team Members
 ------------------------------------------------
-Sophia Keezel
-Gabriel Mannheimer
-Jason Ragans
-Shivraj Khatwani
+Sophia Keezel, Gabriel Mannheimer, Jason Ragans, Shivraj Khatwani
+
 
 
