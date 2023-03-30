@@ -12,6 +12,7 @@ public class UnitManager : MonoBehaviour
     private List<ScriptableUnit> _units;
 
     public BasePlayer SelectedPlayer;
+    public BaseEnemy CurrentEnemy;
 
    void Awake()
    {
@@ -47,10 +48,27 @@ public class UnitManager : MonoBehaviour
         var randomSpawnTile = GridManager.Instance.GetEnemyTile();
 
         randomSpawnTile.SetUnit(spawnedEnemy);
+        randomSpawnTile.setEnemy();
     }
 
-     GameManager.Instance.ChangeState(GameState.PlayerTurn);
-   }
+     GameManager.Instance.ChangeState(GameState.SpawnItem);
+    }
+
+    public void spawnItem()
+    {
+        var itemCount = 1;
+        for(int i = 0; i < itemCount; i++)
+        {
+            var randomPrefab = GetRandomUnit<BaseItem>(Faction.Item);
+            var spawnedItem = Instantiate(randomPrefab);
+            var randomSpawnTile = GridManager.Instance.GetItemTile();
+
+            randomSpawnTile.SetUnit(spawnedItem);
+        }
+
+        GameManager.Instance.ChangeState(GameState.PlayerTurn);
+    }
+
 
 
 
@@ -65,5 +83,15 @@ public class UnitManager : MonoBehaviour
         SelectedPlayer = P;
         MenuManager.Instance.showSelectedPlayer(P);
     }
+
+    public void setCurrentEnemy(BaseEnemy E)
+    {
+        CurrentEnemy = E;
+        MenuManager.Instance.showCurrentEnemy(E);
+    }
+
+    
+
+    
 
 }
