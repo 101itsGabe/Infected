@@ -15,4 +15,17 @@ public class Player1 : BasePlayer
     {
         
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "infected")
+        {
+            Debug.Log("Collided with Infected");
+            GameManager.Instance.ChangeState(GameState.GameEnd);
+        }
+        if(collision.tag == "Burger")
+        {
+            Debug.Log("ZOOWEEE MAMA");
+        }
+    }
 }

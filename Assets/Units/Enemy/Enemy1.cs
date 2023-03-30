@@ -15,4 +15,13 @@ public class Enemy1 : BaseEnemy
     {
         
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "hero")
+        {
+            Debug.Log("Collided with Hero");
+            GameManager.Instance.ChangeState(GameState.GameEnd);
+        }
+    }
 }

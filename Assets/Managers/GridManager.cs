@@ -14,12 +14,16 @@ public class GridManager : MonoBehaviour
     [SerializeField] private Transform _cam;
 
     private Dictionary<Vector2, Tile> _tiles;
+    public int w, h;
 
     void Awake()
     {
         Instance = this;
+        w = _width; h = _height;
+       
     }
 
+   
 
     public void GenerateGird()
     {
@@ -31,6 +35,8 @@ public class GridManager : MonoBehaviour
                 var randomTile = Random.Range(0,6) == 3 ? _mountianTile : _grassTile;
                 var spawnedTile = Instantiate(randomTile, new Vector3(x, y), Quaternion.identity);
                 spawnedTile.name = $"Tile {x} {y}";
+                spawnedTile.xSpot = x;
+                spawnedTile.ySpot = y;
                 spawnedTile.Init(x,y);
                 _tiles[new Vector2(x,y)] = spawnedTile;
             }
@@ -47,8 +53,48 @@ public class GridManager : MonoBehaviour
         return _tiles.Where(t=>t.Key.x <  _width/2 && t.Value.walkable).OrderBy(t => Random.value).First().Value;
     }
 
-        public Tile GetEnemyTile()
+    public Tile GetRealPlayerTile()
+    {
+        foreach(var t in _tiles)
+        {
+            if (t.Value.OccupiedUnit == UnitManager.Instance.SelectedPlayer)
+                return t.Value;
+        }
+        return null;
+    }
+
+    public Tile GetRealEnemyTile()
+    {
+        foreach (var t in _tiles)
+        {
+            if (t.Value.OccupiedUnit == UnitManager.Instance.CurrentEnemy)
+            {
+                return t.Value;
+            }
+        }
+        return null;
+    }
+
+
+
+    public Tile GetEnemyTile()
     {
         return _tiles.Where(t=>t.Key.x >  _width/2 && t.Value.walkable).OrderBy(t => Random.value).First().Value;
+    }
+
+    public Tile GetItemTile()
+    {
+        return _tiles.Where(t => t.Key.x > _width / 2 && t.Value.walkable).OrderBy(t => Random.value).First().Value;
+    }
+
+    public Tile GetATile(int x, int y)
+    {
+        if (x < _width || y < _height || x >= 0 || y >= 0)
+        {
+            var curTile = _tiles[new Vector2(x, y)];
+            return curTile;
+        }
+        else
+            return null;
     }
 }
