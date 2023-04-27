@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using Random = UnityEngine.Random;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public GameState GameState;
+    public string MenuString;
 
     void Awake()    //Allows us to grab from anywhere
     {
@@ -36,6 +38,7 @@ public class GameManager : MonoBehaviour
             case GameState.EnemyTurn:
                 break;
             case GameState.GameEnd:
+                SceneManager.LoadScene(MenuString);
                 break;
 
             //default:

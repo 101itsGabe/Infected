@@ -703,6 +703,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameState: 0
+  MenuString: MainMenu Scene
 --- !u!4 &641502313
 Transform:
   m_ObjectHideFlags: 0
